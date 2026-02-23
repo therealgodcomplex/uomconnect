@@ -1,0 +1,78 @@
+// ── CONFIG ───────────────────────────────────────────────
+const API = window.location.origin; // works both local + deployed
+const ADMIN_KEY = "your_admin_key"; // only needed for admin actions
+
+// ── NOTICES ──────────────────────────────────────────────
+async function fetchNotices(category = null) {
+  const url = new URL(`${API}/api/notices`);
+  if (category) url.searchParams.set("category", category);
+  const r = await fetch(url);
+  const { data } = await r.json();
+  return data;
+}
+
+// ── CALENDAR ─────────────────────────────────────────────
+async function fetchCalendar(month, year, category = null) {
+  const url = new URL(`${API}/api/calendar`);
+  url.searchParams.set("month", month);
+  url.searchParams.set("year", year);
+  if (category) url.searchParams.set("category", category);
+  const r = await fetch(url);
+  return r.json();
+}
+
+// ── FORUMS ───────────────────────────────────────────────
+async function fetchForums(tag = null) {
+  const url = new URL(`${API}/api/forums`);
+  if (tag) url.searchParams.set("tag", tag);
+  const r = await fetch(url);
+  return r.json();
+}
+
+async function postForum(title, body, tag, author_name) {
+  const r = await fetch(`${API}/api/forums`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title, body, tag, author_name })
+  });
+  return r.json();
+}
+
+async function fetchReplies(postId) {
+  const r = await fetch(`${API}/api/forums/${postId}/replies`);
+  return r.json();
+}
+
+async function postReply(postId, content, author_name) {
+  const r = await fetch(`${API}/api/forums/${postId}/replies`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content, author_name })
+  });
+  return r.json();
+}
+
+// ── COMPLAINTS ───────────────────────────────────────────
+async function submitComplaint(content, category) {
+  const r = await fetch(`${API}/api/complaints`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content, category })
+  });
+  return r.json(); // returns { ref_id, status }
+}
+
+async function checkComplaintStatus(refId) {
+  const r = await fetch(`${API}/api/complaints/${refId}`);
+  return r.json();
+}
+
+// ── SOCKET.IO — live updates ──────────────────────────────
+// Add to <head>: <script src="/socket.io/socket.io.js"></script>
+const socket = io();
+
+socket.on("notice:new",      notice   => addNoticeToUI(notice));
+socket.on("calendar:new",    event    => addEventToUI(event));
+socket.on("forum:new",       post     => addPostToUI(post));
+socket.on("reply:new",       reply    => addReplyToUI(reply));
+socket.on("complaint:updated", update => updateComplaintUI(update));
