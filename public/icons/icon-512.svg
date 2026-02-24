@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000d2e"/>
+      <stop offset="100%" stop-color="#00040f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#0a84ff"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a84ff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#bf5af2" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <!-- Glow backdrop -->
+  <circle cx="256" cy="256" r="186" fill="url(#glow)"/>
+
+  <!-- Connection nodes — three dots in a triangle -->
+  <circle cx="256" cy="144" r="32" fill="url(#accent)"/>
+  <circle cx="154" cy="325" r="32" fill="url(#accent)" opacity="0.85"/>
+  <circle cx="358" cy="325" r="32" fill="url(#accent)" opacity="0.85"/>
+
+  <!-- Connection lines -->
+  <line x1="256" y1="144" x2="154" y2="325" stroke="url(#accent)" stroke-width="9" stroke-linecap="round" opacity="0.7"/>
+  <line x1="256" y1="144" x2="358" y2="325" stroke="url(#accent)" stroke-width="9" stroke-linecap="round" opacity="0.7"/>
+  <line x1="154" y1="325" x2="358" y2="325" stroke="url(#accent)" stroke-width="9" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Center hub -->
+  <circle cx="256" cy="256" r="18" fill="#fff" opacity="0.9"/>
+  <circle cx="256" cy="256" r="34" fill="none" stroke="url(#accent)" stroke-width="5" opacity="0.5"/>
+</svg>

@@ -1,0 +1,25 @@
+{
+  "name": "UoMConnect",
+  "short_name": "UoMConnect",
+  "description": "University of Manchester campus portal — notices, calendar, forum, map & more.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#00040f",
+  "theme_color": "#0a84ff",
+  "icons": [
+    {
+      "src": "/icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
